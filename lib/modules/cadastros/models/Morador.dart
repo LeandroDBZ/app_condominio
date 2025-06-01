@@ -10,6 +10,7 @@ class Morador {
   final String nome;
   final String telefone;
   final String cpf;
+  // Outras listas que relacionam o morador com outras entidades:
   final List<Veiculo> veiculos;
   final List<Reserva> reservas;
   final List<Ocorrencia> ocorrencias;
@@ -29,31 +30,24 @@ class Morador {
         ocorrencias = ocorrencias ?? [],
         visitantes = visitantes ?? [];
 
-  /// Adiciona um visitante à lista de solicitações.
+  /// Exemplo de criação (os métodos de ação já podem ser definidos aqui se necessário)
   void solicitarLiberacaoVisitante(Visitante v) {
     visitantes.add(v);
     print('Visitante ${v.nome} liberado pelo morador $nome.');
   }
-
-  /// Registra uma ocorrência no histórico do morador.
   void registrarOcorrencia(Ocorrencia o) {
     ocorrencias.add(o);
     print('Ocorrência "${o.titulo}" registrada pelo morador $nome.');
   }
-
-  /// Registra uma reserva para área comum.
   void reservarAreaComum(Reserva r) {
     reservas.add(r);
     print('Reserva ${r.id} realizada pelo morador $nome.');
   }
-
-  /// Adiciona um veículo ao cadastro do morador.
   void cadastrarVeiculo(Veiculo v) {
     veiculos.add(v);
     print('Veículo ${v.placa} cadastrado pelo morador $nome.');
   }
 
-  /// Construtor para criar uma instância de Morador a partir de JSON.
   factory Morador.fromJson(Map<String, dynamic> json) {
     return Morador(
       id: json['id'] as String,
@@ -83,7 +77,6 @@ class Morador {
     );
   }
 
-  /// Converte a instância para um Map compatível com JSON.
   Map<String, dynamic> toJson() {
     return {
       'id': id,

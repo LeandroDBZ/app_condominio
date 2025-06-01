@@ -3,9 +3,17 @@ import 'package:flutter/material.dart';
 import 'modules/cadastros/models/unidade.dart';
 import 'modules/cadastros/repositories/unidade_repository.dart';
 import 'modules/cadastros/screens/unidade_form_screen.dart';
+import 'modules/cadastros/screens/morador_list_screen.dart';
+
+//void main() {
+//  runApp(MyApp());
+//}
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    title: 'Cadastro de Moradores',
+    home: MoradorListScreen(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
