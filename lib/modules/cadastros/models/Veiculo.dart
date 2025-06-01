@@ -1,3 +1,5 @@
+// lib/modules/cadastros/models/veiculo.dart
+
 class Veiculo {
   final String id;
   String cor;
@@ -33,10 +35,9 @@ class Veiculo {
     );
   }
 
-  /// Converte essa instância em um Map compatível com JSON.
+  /// Converte esta instância em um Map compatível com JSON.
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'cor': cor,
       'placa': placa,
       'marca': marca,
