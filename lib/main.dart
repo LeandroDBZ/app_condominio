@@ -1,5 +1,5 @@
 // lib/main.dart
-import 'package:app_condominio/modules/cadastros/screens/morador_list_screen.dart';
+import 'package:app_condominio/modules/cadastros/screens/funcionario_list_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Integração Firebase',
+      title: 'Cadastro de Funcionários',
       theme: ThemeData(primarySwatch: Colors.blue),
       // Aqui você pode definir sua tela inicial (por exemplo, MoradorListScreen)
-      home: MoradorListScreen(), 
+      home: FuncionarioListScreen(), 
     );
   }
 }
