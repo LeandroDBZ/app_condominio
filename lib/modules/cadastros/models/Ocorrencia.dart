@@ -1,3 +1,5 @@
+// lib/modules/cadastros/models/ocorrencia.dart
+
 class Ocorrencia {
   final String id;
   final String titulo;
@@ -13,12 +15,12 @@ class Ocorrencia {
     required this.dataHoraRegistro,
   });
 
-  /// Registra a ocorrência.
+  /// Exemplo de ação: registra a ocorrência.
   void registrarOcorrencia() {
     print("Ocorrência '$titulo' registrada em $dataHoraRegistro.");
   }
 
-  /// Notifica a administração sobre a ocorrência.
+  /// Exemplo de ação: notifica a administração.
   void notificarAdministracao() {
     print("Administração notificada sobre a ocorrência '$titulo'.");
   }
@@ -34,10 +36,9 @@ class Ocorrencia {
     );
   }
 
-  /// Converte essa instância em um Map compatível com JSON.
+  /// Converte esta instância em um Map compatível com JSON.
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'titulo': titulo,
       'descricao': descricao,
       'tipo': tipo,
