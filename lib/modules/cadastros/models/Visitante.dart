@@ -15,16 +15,17 @@ class Visitante {
     required this.validade,
   });
 
-  /// Gera um QR Code simples de exemplo para o visitante.
+  /// Gera um QR Code simples para o visitante.  
+  /// Exemplo: adiciona um prefixo e um número aleatório formatado.
   void gerarQRCode() {
-    qrCode = "QR${Random().nextInt(100000).toString().padLeft(5, '0')}";
-    print("QR Code gerado para o visitante $nome: $qrCode.");
+    qrCode = "QR" + Random().nextInt(100000).toString().padLeft(5, '0');
+    print("QR Code gerado para o visitante $nome: $qrCode");
   }
 
-  /// Verifica se o QR Code ainda é válido com base na data atual.
+  /// Verifica se o QR Code ainda é válido comparando a data atual com a validade.
   bool isQRCodeValido(DateTime now) {
     bool valido = now.isBefore(validade);
-    print("QR Code do visitante $nome é ${valido ? "válido" : "inválido"}.");
+    print("QR Code do visitante $nome é ${valido ? 'válido' : 'inválido'}.");
     return valido;
   }
 
@@ -39,10 +40,9 @@ class Visitante {
     );
   }
 
-  /// Converte essa instância em um Map compatível com JSON.
+  /// Converte esta instância para um Map compatível com JSON.
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'nome': nome,
       'documento': documento,
       'qrCode': qrCode,
