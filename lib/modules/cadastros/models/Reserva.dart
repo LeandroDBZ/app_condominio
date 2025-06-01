@@ -1,3 +1,5 @@
+// lib/modules/cadastros/models/reserva.dart
+
 class Reserva {
   final String id;
   DateTime data;
@@ -13,20 +15,20 @@ class Reserva {
     this.status = 'Pendente',
   });
 
-  /// Envia a solicitação de reserva.
+  /// Envia a solicitação de reserva (exemplo de ação).
   void enviarSolicitacao() {
-    print("Reserva $id enviada.");
+    print("Reserva $id: solicitação enviada.");
   }
 
   /// Atualiza o status da reserva.
   void atualizarStatus(String novoStatus) {
     status = novoStatus;
-    print("Reserva $id atualizada para $status.");
+    print("Reserva $id atualizada para: $status");
   }
 
   /// Notifica o morador sobre o status da reserva.
   void notificarMoradorSobreStatus() {
-    print("Morador notificado sobre o status da reserva $id.");
+    print("Morador notificado sobre reserva $id com status $status.");
   }
 
   /// Cria uma instância de Reserva a partir de um Map (JSON).
@@ -36,14 +38,13 @@ class Reserva {
       data: DateTime.parse(json['data'] as String),
       horaInicio: DateTime.parse(json['horaInicio'] as String),
       horaFim: DateTime.parse(json['horaFim'] as String),
-      status: json['status'] as String,
+      status: json['status'] as String? ?? 'Pendente',
     );
   }
 
-  /// Converte essa instância em um Map compatível com JSON.
+  /// Converte esta instância em um Map compatível com JSON.
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'data': data.toIso8601String(),
       'horaInicio': horaInicio.toIso8601String(),
       'horaFim': horaFim.toIso8601String(),
