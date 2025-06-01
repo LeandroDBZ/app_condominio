@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "201388432176",
+    "project_id": "appcondominio-5508b",
+    "storage_bucket": "appcondominio-5508b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201388432176:android:413d899294d0c1532506f5",
+        "android_client_info": {
+          "package_name": "com.example.app_condominio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMcvlP-hE5xfO-3J-AlR5s2GrVtQoEtow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

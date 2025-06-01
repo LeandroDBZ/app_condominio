@@ -1,40 +1,25 @@
 // lib/main.dart
+import 'package:app_condominio/modules/cadastros/screens/morador_list_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'modules/cadastros/models/unidade.dart';
-import 'modules/cadastros/repositories/unidade_repository.dart';
-import 'modules/cadastros/screens/unidade_form_screen.dart';
-import 'modules/cadastros/screens/morador_list_screen.dart';
 
-//void main() {
-//  runApp(MyApp());
-//}
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
-  runApp(MaterialApp(
-    title: 'Cadastro de Moradores',
-    home: MoradorListScreen(),
-  ));
+  // Inicializa o Firebase
+  await Firebase.initializeApp();
+  
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // Instância do repositório. Se sua API não estiver disponível
-  // para testes, você pode criar uma implementação fake.
-  final UnidadeRepository repository = UnidadeRepository();
-
   @override
   Widget build(BuildContext context) {
-    // Para testar o comportamento de edição, você pode criar uma Unidade dummy.
-    // Para testar o "novo cadastro", deixe a variável como null.
-    Unidade? dummyUnidade;
-    // Descomente a linha abaixo para testar a edição de uma Unidade existente:
-    // dummyUnidade = Unidade(id: '1', bloco: 'A', apartamento: '101');
-
     return MaterialApp(
-      title: 'Teste de Unidade Form',
-      // ignore: unnecessary_null_comparison
-      home: dummyUnidade == null 
-          ? UnidadeFormScreen(repository: repository)
-          : UnidadeFormScreen(repository: repository, unidade: dummyUnidade),
+      title: 'Integração Firebase',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      // Aqui você pode definir sua tela inicial (por exemplo, MoradorListScreen)
+      home: MoradorListScreen(), 
     );
   }
 }

@@ -1,55 +1,46 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+// lib/modules/cadastros/repositories/morador_repository.dart
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/morador.dart';
 
 class MoradorRepository {
-  // URL base da API para a entidade Morador – ajuste conforme sua API.
-  final String baseUrl = 'https://api.example.com/moradores';
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final String collectionPath = 'moradores';
 
   // Retorna a lista de moradores
   Future<List<Morador>> getMoradores() async {
-    final response = await http.get(Uri.parse(baseUrl));
-    if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body);
-      return data.map((json) => Morador.fromJson(json)).toList();
-    } else {
-      throw Exception('Erro ao carregar moradores');
-    }
+    QuerySnapshot snapshot = await firestore.collection(collectionPath).get();
+
+    return snapshot.docs.map((doc) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      // Considere incluir o ID do documento no objeto
+      data['id'] = doc.id;
+      return Morador.fromJson(data);
+    }).toList();
   }
 
-  // Cria um novo morador (POST)
+  // Cria um novo morador (adiciona um documento)
   Future<Morador> createMorador(Morador morador) async {
-    final response = await http.post(
-      Uri.parse(baseUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode(morador.toJson()),
-    );
-    if (response.statusCode == 201) {
-      return Morador.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Erro ao criar morador');
-    }
+    DocumentReference docRef =
+        await firestore.collection(collectionPath).add(morador.toJson());
+    
+    // Após a criação, recupera os dados para retornar o objeto atualizado
+    DocumentSnapshot docSnapshot = await docRef.get();
+    Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+    data['id'] = docSnapshot.id;
+    return Morador.fromJson(data);
   }
 
-  // Atualiza um morador existente (PUT)
+  // Atualiza um morador existente (atualiza o documento)
   Future<Morador> updateMorador(Morador morador) async {
-    final response = await http.put(
-      Uri.parse('$baseUrl/${morador.id}'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode(morador.toJson()),
-    );
-    if (response.statusCode == 200) {
-      return Morador.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Erro ao atualizar morador');
-    }
+    await firestore.collection(collectionPath).doc(morador.id).update(morador.toJson());
+    DocumentSnapshot docSnapshot = await firestore.collection(collectionPath).doc(morador.id).get();
+    Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+    data['id'] = docSnapshot.id;
+    return Morador.fromJson(data);
   }
 
-  // Remove um morador (DELETE)
+  // Remove um morador (deleta o documento)
   Future<void> deleteMorador(String id) async {
-    final response = await http.delete(Uri.parse('$baseUrl/$id'));
-    if (response.statusCode != 204) {
-      throw Exception('Erro ao remover morador');
-    }
+    await firestore.collection(collectionPath).doc(id).delete();
   }
 }
